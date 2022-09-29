@@ -61,7 +61,7 @@ $ oc create secret generic cloud-credentials --from-file cloud=credentials-veler
 
 Noobaa 스토리지 클래스로 오브젝트 버킷 클레임 생성
 
-![bucket-claim](img/bucket-claim.png)
+![bucket-claim](img/hub-backup/bucket-claim.png)
 
 
 
@@ -152,7 +152,7 @@ openshift-adp   acm-validation-policy-schedule     2m44s
 
 ------
 
-## (3. Active-Passive 구성)
+## 3. Active-Passive 구성
 
 - Active 허브: 클러스터를 관리하고  `BackupSchedule`에 정의된 시간 간격으로 리소스를 백업
 - Passive 허브: 최신 백업을 지속적으로 검색하고 Passive 데이터를 복원. 기본 허브 클러스터가 다운되면 Activation 데이터를 복원하여 Active 허브가 됩니다. 
@@ -168,14 +168,13 @@ Active 허브 클러스터가 백업한 데이터는 다음과 같은 시나리�
 - 시나리오3: Passive 허브가 지속적으로 패시브 데이터 복원 => 필요 시 액티브 데이터 복원하여 연결 활성화
 
 
-
-<img src="img/active_passive_config_design.png" alt="능동 수동 구성 다이어그램" style="zoom:33%;" />
+![active_passive_config_design](img/hub-backup/active_passive_config_design.png)
 
 Passive 허브 클러스터는 매니지드 클러스터 활성화 데이터(매니지드 클러스터를 Passive 허브 클러스터로 이동)를 제외하고, Passive 데이터를 복원합니다.
 
 
 
-## (4. 허브 백업을 사용해서 복구하는 방법)
+## 4. 허브 백업을 사용해서 복구하는 방법
 
 ### 4-1. 복구 방법 설명
 
