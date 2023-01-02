@@ -27,14 +27,17 @@ Apache Kafka 및 OpenShift를 사용하는 음식 배달 예제 애플리케이�
 
 ## 순서
 
-1. Repository 복제
-2. dd
+1. OpenShift 클러스터에 오퍼레이터 설치
+2. REPO 복제
+3. Kafka 서비스 인스턴스 생성
+4. 애플리케이션 배포
+5. KEDA ScaledObjects 배포
+6. 애플리케이션 route 배포
 
 
 
 
-
-### 1. OpenShift 클러스터
+### 1. OpenShift 클러스터에 오퍼레이터 설치
 
 먼저 예제 애플리케이션을 배포하기 위해 오픈시프트 클러스터에 `food-delivery` 프로젝트를 새로 생성합니다. 아래와 같이 CLI를 이용하거나, 콘솔을 사용할 수도 있습니다.
 
@@ -72,7 +75,7 @@ git clone https://github.com/IBM/scaling-apps-with-kafka
 
 
 
-### 3. Kafka 서비스 생성
+### 3. Kafka 서비스 인스턴스 생성
 
 레드햇 아이디가 있으면, [레드햇 애플리케이션 서비스 웹사이트](https://console.redhat.com/application-services/streams/kafkas)에서 48시간 동안 동작하는 무료 kafka instance를 생성할 수 있습니다. 
 
@@ -207,7 +210,7 @@ oc apply -f deployments/keda-scaler.yaml
 
 
 
-### 6. 애플리케이션 실행
+### 6. 애플리케이션 route 배포
 
 애플리케이션에 접근하려면 프런트엔드와 마이크로서비스를 노출해야 합니다.
 
