@@ -14,7 +14,7 @@ Apache Kafka 및 OpenShift를 사용하는 음식 배달 예제 애플리케이�
 
 
 
-![건축학](img/openshift-keda-with-kafka/architecture.png)
+![architecture](img/openshift-keda-with-kafka/architecture.png)
 
 
 
@@ -51,13 +51,13 @@ oc new-project food-delivery
 
 해당 오퍼레이터는 `openshift-keda` 프로젝트에 설치되며, 설치가 완료되기까지 몇 분의 시간이 소요될 수 있습니다.
 
-![image-20230102161921690](img/openshift-keda-with-kafka/operatorhub.png)
+![operatorhub](img/openshift-keda-with-kafka/operatorhub.png)
 
 
 
 오퍼레이터 설치가 완료되면 `KedaController` 인스턴스 생성 선택 -> 기본값(이름: keda)으로 인스턴스를 생성합니다.
 
-![image-20230102162326819](img/openshift-keda-with-kafka/operator-kedacontroller.png)
+![operator-kedacontroller](img/openshift-keda-with-kafka/operator-kedacontroller.png)
 
 
 
@@ -79,7 +79,7 @@ git clone https://github.com/IBM/scaling-apps-with-kafka
 
 레드햇 아이디가 있으면, [레드햇 애플리케이션 서비스 웹사이트](https://console.redhat.com/application-services/streams/kafkas)에서 48시간 동안 동작하는 무료 kafka instance를 생성할 수 있습니다. 
 
-![image-20230102153039691](img/openshift-keda-with-kafka/kafka-webservice.png)
+![kafka-webservice](img/openshift-keda-with-kafka/kafka-webservice.png)
 
 이름 및 각종 설정값은 임의로 작성 및 선택하여 생성하면 됩니다. 잠시 기다리면 kafka 인스턴스가 성공적으로 생성되었음을 확인할 수 있습니다.
 
@@ -89,19 +89,19 @@ git clone https://github.com/IBM/scaling-apps-with-kafka
 
 아래와 같이 이름은 `orders`, partitions의 수는 6으로 설정, 나머지는 기본값으로 두고 새로운 topic를 생성합니다.
 
-![image-20230102154649608](img/openshift-keda-with-kafka/kafka-topic.png)
+![kafka-topic](img/openshift-keda-with-kafka/kafka-topic.png)
 
 
 
 그리고 맨 오른쪽의 `...` 아이콘 -> `connection`을 선택합니다.
 
-![image-20230102154810576](img/openshift-keda-with-kafka/kafka-connection-1.png)
+![kafka-connection-1](img/openshift-keda-with-kafka/kafka-connection-1.png)
 
 
 
 
 
-![image-20230102155741504](img/openshift-keda-with-kafka/kafka-connection-2.png)
+![kafka-connection-2](img/openshift-keda-with-kafka/kafka-connection-2.png)
 
 그러면 위와 같은 화면이 보입니다. 여기서 확인할 수 있는 Bootstrap Server 주소를 복사해두합니다.
 
@@ -116,7 +116,7 @@ git clone https://github.com/IBM/scaling-apps-with-kafka
 2. 그리고 Assign permission 부분에서 Add permission -> 'Consume from topic'와 'Produce to a topic'를 각각 클릭하면 아래와 같은 필드들이 추가됩니다. 
 3. 대상 topic과 consumer group값은 아래와 같이 **IS '*'** 로 설정하고, Save를 눌러 권한 수정 내용을 저장합니다.
 
-![image-20230102163206679](img/openshift-keda-with-kafka/kafka-permissions.png)
+![kafka-permissions](img/openshift-keda-with-kafka/kafka-permissions.png)
 
 
 
@@ -276,13 +276,13 @@ curl -X POST -H "Content-Type: application/json" -d @restaurants.json http://YOU
 
 하단 섹션의 슬라이더를 조정하여 주문 속도와 주방 및 배달의 처리 속도를 조정할 수 있습니다. 마이크로서비스(Status, Order, Driver, Kitchen Service) 위의 숫자는 파드의 수이고, 아래 숫자는 사용 중인 메시지의 수입니다.
 
-![img](img/openshift-keda-with-kafka/sample-output-1.png)
+![sample-output-1](img/openshift-keda-with-kafka/sample-output-1.png)
 
 먼저 배달원(couriers)과 주방(kitchen)의 속도는 최대, 주문(order) 속도는 최소로 설정해서 START를 누르면 오른쪽에 생성된 주문과 완료된 주문의 그래프 데이터 포인트가 표시되기 시작합니다. Consumer가 초당 1개의 주문을 처리할 수 있으므로 파드(Pod)의 수는 동일하게 유지됩니다.
 
 
 
-![img](img/openshift-keda-with-kafka/sample-output-2.png)
+![sample-output-2](img/openshift-keda-with-kafka/sample-output-2.png)
 
 그런 다음 주문 속도를 최대로 높이면, 주문을 처리하기 위해 Driver와 Kitchen 파드 수가 증가하는 것을 확인할 수 있습니다. 
 
